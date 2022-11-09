@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Loan Department">
+
+  <test thread-count="5" name="smoke">
+  <groups>
+  <run>
+  <include name="smoke"></include>
+  </run>
+  </groups>
+    <classes>
+      <class name="basicsoftestng.day1"/>
+  		<class name="basicsoftestng.day2"/>
+      <class name="basicsoftestng.day3"/>
+  	<class name="basicsoftestng.day4"/>
+     
+    </classes>
+  </test> 
+  
+  
+  
+</suite> 

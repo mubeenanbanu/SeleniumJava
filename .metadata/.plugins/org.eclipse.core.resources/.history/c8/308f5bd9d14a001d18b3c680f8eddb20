@@ -1,0 +1,47 @@
+package basicsoftestng;
+
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Test;
+
+public class day3 {
+	@BeforeSuite
+	public void bfsuite()
+	{
+		System.out.println("before suite method day3");
+	}
+
+	@Test
+	public void WebloginCarLoan()
+	{
+		System.out.println("WebloginCar");
+		
+	}
+	@Test
+	public void MobileloginCarLoan()
+	{
+		System.out.println("MobileloginCar");
+	}
+	@Test
+	public void MobilesignoutCarLoan()
+	{
+		System.out.println("MobilesignoutCar");
+	}
+	@Test
+	public void MobilesigninCarLoan()
+	{
+		System.out.println("MobilesigninCar");
+	}
+	@Test
+	public void APILogincarloan()
+	{
+		System.out.println("APIloginCar");
+	}
+	@AfterTest
+	public void cleanup()
+	{
+		System.out.println("after method in day3");
+	}
+
+}
