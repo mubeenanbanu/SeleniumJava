@@ -15,6 +15,10 @@
 	</section>
 	<section name="RefactoringWizard.Convert from JUnit">
 		<item key="width" value="910"/>
-		<item key="height" value="597"/>
+		<item key="height" value="634"/>
+	</section>
+	<section name="RefactoringWizard.Clean Up">
+		<item key="width" value="600"/>
+		<item key="height" value="400"/>
 	</section>
 </section>

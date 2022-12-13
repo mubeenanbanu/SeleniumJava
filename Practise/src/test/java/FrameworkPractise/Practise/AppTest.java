@@ -3,6 +3,8 @@ package FrameworkPractise.Practise;
 
 
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -16,51 +18,64 @@ import org.testng.annotations.Test;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-/**
- * Unit test for simple App.
- */
 public class AppTest 
 {
-    /**
-     * Rigorous Test :-)
-     * @throws InterruptedException 
-     */
-    @Test
+    @SuppressWarnings("null")
+	@Test
     public static void OpenCart() throws InterruptedException
     {
-        WebDriverManager.chromedriver().setup();
+       
         WebDriver driver=new ChromeDriver();
-        driver.get("https://demo.opencart.com/index.php");
+        driver.get("https://rahulshettyacademy.com/seleniumPractise/#/");
         driver.manage().window().maximize();
-     
-        List<WebElement> laptops=driver.findElements(By.xpath("//ul[@class='nav navbar-nav']/li[2]//a"));
-        Actions a=new Actions(driver);
-        a.moveToElement(laptops.stream().filter(p->p.getText().equalsIgnoreCase("Laptops & Notebooks")).findFirst().orElse(null)).perform();
-        a.moveToElement(laptops.stream().filter(p->p.getText().equalsIgnoreCase("Show All Laptops & Notebooks")).
-        		findFirst().orElse(null)).click().perform();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        
         WebDriverWait wait=new WebDriverWait(driver, Duration.ofSeconds(5));
-        		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"product-list\"]")));
-        List<WebElement> availableLaptops=driver.findElements(By.xpath("//*[@class='description']//a"));
+        		wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("products")));
+        List<WebElement> availableVeggies=driver.findElements(By.className("product-name"));
         int count=0;
-        for(WebElement l:availableLaptops)
+        String[] givenproducts= {"Carrot","Beans","Potato","Apple","Mango","Pears"};
+        List<String > prods=null;
+        for(int i=0;i<availableVeggies.size();i++)
         {
-        	if(l.getText().equalsIgnoreCase("MacBook"))
+        	prods=Arrays.asList(givenproducts);	
+        	String[] veggie=availableVeggies.get(i).getText().split("-");
+        
+        	String veg=veggie[0].trim();
+        	
+        	if(prods.contains(veg))
         	{
-        		
-        		break;
+        		Thread.sleep(500);
+        		driver.findElements(By.xpath("//button[text()='ADD TO CART']")).get(i).click();
         	}
-//        	List<WebElement> addtocartButtons=l.findElements(By.xpath("/parent::h4/parent::div/following-sibling::div/button[1]"));
-//        	addtocartButtons.get(count).click();
-//        	count++;
+        	Thread.sleep(1000);
+       
+        }
+        driver.findElement(By.xpath("//img[@alt='Cart']")).click();
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//*[text()='PROCEED TO CHECKOUT']")).click();
+        List<WebElement> cartProddispay=driver.findElements(By.xpath("//div/table/tbody/tr/td[2]/p"));
+
+        List<String> secondList = new ArrayList<>();   
+  
+        for(WebElement i:cartProddispay)
+        { 
+        	
+        	String c=i.getText().split("-")[0].trim();
+        	secondList.add(c);
         	
         }
+        System.out.println("Given products "+prods);
+        System.out.println("Products in the cart "+secondList);
+        driver.findElement(By.xpath("//button[text()='Place Order']")).click();
+        driver.findElement(By.cssSelector(".chkAgree")).click();
         
-        Thread.sleep(1000);
-//        WebElement lap=availableLaptops.stream().filter(p->p.getText().equalsIgnoreCase("MacBook")).findFirst().orElse(null);
-//        System.out.println(lap.getText());
-//        lap.findElements(By.xpath("/parent::h4/parent::div/following-sibling::div/button[1]"));
-       
-        driver.close();
+        driver.findElement(By.xpath("//button[text()='Proceed']")).click();
+        String msg=driver.findElement(By.xpath("//span")).getText();
+        System.out.println(msg);
+
+    
         
     }
+   		
 }

@@ -56,7 +56,7 @@ public class DemoblazeTest extends BaseTest{
 
 	}
 
-	@Test()
+	@Test(retryAnalyzer=testcomponents.RetryClass.class)
 	public void AddProductToCart() throws IOException, InterruptedException
 	{
 		String prod = "Sony xperia z5";

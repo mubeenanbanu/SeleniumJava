@@ -10,16 +10,16 @@ public class Program1 {
 	}
 	public static void ReverseNumber()
 	{
-		int n=987;
+		int n=123;
 		int rem=0,sum=0;
 		while(n>0)
-			
 		{
 			rem=n%10;
 			sum=sum*10+rem;
 			n=n/10;
 		}
 		System.out.println(sum);
+
 	}
 	public static void LargestOfThreeNumbers()
 	{
@@ -41,12 +41,11 @@ public class Program1 {
 	}
 	public static void Frequencywords()
 	{
-		String str="aavghvgah";
-		char[] ch=str.toCharArray();
-		HashMap<Character,Integer> hp=new HashMap<>();
+		String n="ahytjthaw";
+		char[] ch=n.toCharArray();
+		HashMap<Character,Integer> hp=new HashMap<Character,Integer>();
 		for(int i=0;i<ch.length;i++)
 		{
-			
 			if(hp.containsKey(ch[i]))
 			{
 				int count=hp.get(ch[i]);
@@ -56,9 +55,10 @@ public class Program1 {
 			{
 				hp.put(ch[i], 1);
 			}
-			
 		}
 		System.out.println(hp);
+		
+	
 		
 		
 	}

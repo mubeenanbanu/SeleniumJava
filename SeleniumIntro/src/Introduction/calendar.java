@@ -7,10 +7,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import com.mysql.cj.jdbc.Driver;
 
 public class calendar {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		// TODO Auto-generated method stub
 		System.setProperty("webdriver.chrome.driver",
 				"C:\\Users\\mubeena\\Downloads\\chromedriver_win32\\chromedriver.exe");
@@ -34,7 +38,8 @@ public class calendar {
 //				days.get(i).click();
 //			}
 //		}
-		HandleCalendar( driver );
+		//HandleCalendar( driver );
+		HandleCalendar1(driver);
 		
 		driver.quit();
 
@@ -65,6 +70,39 @@ public class calendar {
 		}
 		}
 
+	}
+	public static void HandleCalendar1(WebDriver driver ) throws InterruptedException
+	{
+		driver.get("https://www.clock-software.com/demo-clockpms/index.html");
+		WebDriverWait wait =new WebDriverWait(driver,Duration.ofSeconds(10));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("date-start")));
+		driver.findElement(By.id("date-start")).click();
+		String expectedMonth="Dec";
+		String expectedYear="2022";
+		String day="22";
+		String n=driver.findElement(By.xpath("//th[@class='datepicker-switch'][1]")).getText();
+		String dismonth=n.split(" ")[0].trim();
+		String disyear=n.split(" ")[1].trim();
+		
+		while(!(dismonth.contains(expectedMonth) &&  disyear.equalsIgnoreCase(expectedYear)))
+		{
+			driver.findElement(By.xpath("//th[text()=\"»\"][1]")).click();
+			n=driver.findElement(By.xpath("//th[@class='datepicker-switch'][1]")).getText();
+			dismonth=n.split(" ")[0].trim();
+			disyear=n.split(" ")[1].trim();
+			
+		}
+		System.out.println(dismonth);
+	
+		Thread.sleep(3000);
+		List<WebElement> dates= driver.findElements(By.xpath("//div[@class='datepicker-days']/table/tbody/tr[4]/td[3]"));
+		for(int i=0;i<dates.size();i++)
+		{
+			if(dates.get(i).getText().equalsIgnoreCase(day))
+			{
+				dates.get(i).click();
+			}
+		}
 	}
 		
 }

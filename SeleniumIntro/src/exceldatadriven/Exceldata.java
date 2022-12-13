@@ -80,8 +80,6 @@ public class Exceldata {
 //				System.out.println(row.getCell(j));
 //				a.add(format.formatCellValue(row.getCell(j)));
 //				System.out.println(format.formatCellValue(row.getCell(j)));
-				
-				
 			}
 		}
 		return a;

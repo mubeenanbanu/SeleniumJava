@@ -25,8 +25,8 @@ public class assign4 {
 	{
 		driver.findElement(By.linkText("Multiple Windows")).click();
 		driver.findElement(By.linkText("Click Here")).click();
-		Set<String> windows=driver.getWindowHandles();
-		Iterator<String> it=windows.iterator();
+		Set<String> handles=driver.getWindowHandles();
+		Iterator<String> it=handles.iterator();
 		String currentWindow=it.next();
 		String childWindow=it.next();
 		driver.switchTo().window(childWindow);

@@ -28,7 +28,7 @@ public class actionsDemo {
 		Actions a=new Actions(driver);
 		//a.moveToElement(account).perform();
 		WebElement search=driver.findElement(By.id("twotabsearchtextbox"));
-		a.moveToElement(search).click().keyDown(Keys.SHIFT).sendKeys("hello").perform();
+		a.moveToElement(search).click().keyDown(Keys.SHIFT).sendKeys("hello").build().perform();
 	
 		Thread.sleep(1000);
 		a.contextClick(account).perform();

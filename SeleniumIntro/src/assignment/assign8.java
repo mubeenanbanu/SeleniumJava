@@ -8,14 +8,19 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
+
 public class assign8 {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		System.setProperty("webdriver.chrome.driver",
-				"C:\\Users\\mubeena\\Downloads\\chromedriver_win32\\chromedriver.exe");
-
-		WebDriver driver = new ChromeDriver();
+//		System.setProperty("webdriver.chrome.driver",
+//				"C:\\Users\\mubeena\\Downloads\\chromedriver_win32\\chromedriver.exe");
+//
+//		WebDriver driver = new ChromeDriver();
+		WebDriver driver;
+		WebDriverManager.chromedriver().setup();
+		driver = new ChromeDriver();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 		driver.get("https://www.rahulshettyacademy.com/AutomationPractice/");
 		driver.manage().window().maximize();

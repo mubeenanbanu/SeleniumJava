@@ -29,12 +29,16 @@
 	</section>
 	<section name="Maven2ProjectWizardArchifactPage">
 		<list key="package">
+			<item value="FrameworkPractise.ClockWebReservation"/>
+			<item value="FrameworkPractise.DemoBlaze"/>
 			<item value="FrameworkPractise.Practise"/>
 		</list>
 		<list key="groupId">
 			<item value="FrameworkPractise"/>
 		</list>
 		<list key="artifactId">
+			<item value="ClockWebReservation"/>
+			<item value="DemoBlaze"/>
 			<item value="Practise"/>
 		</list>
 		<list key="projectNameTemplate">

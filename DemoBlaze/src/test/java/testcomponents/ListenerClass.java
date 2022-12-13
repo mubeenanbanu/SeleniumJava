@@ -1,5 +1,8 @@
 package testcomponents;
 
+import java.io.IOException;
+
+import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
@@ -10,31 +13,54 @@ import com.aventstack.extentreports.Status;
 
 import resources.ExtentreportFile;
 
-public class ListenerClass implements ITestListener{
+public class ListenerClass extends BaseTest implements ITestListener {
 
+	WebDriver driver;
 	ExtentreportFile extent=new ExtentreportFile();
 	ExtentReports ext=extent.ExtentFile();
 	ExtentTest test;
+	ThreadLocal<ExtentTest>  t=new ThreadLocal<ExtentTest>();
 	
 	@Override
 	public void onTestStart(ITestResult result) {
 		// TODO Auto-generated method stub
 		ITestListener.super.onTestStart(result);
-		test=ext.createTest(result.getMethod().getMethodName());
+		t.set(ext.createTest(result.getMethod().getMethodName()));
 	}
 
 	@Override
 	public void onTestSuccess(ITestResult result) {
 		// TODO Auto-generated method stub
 		ITestListener.super.onTestSuccess(result);
-		test.log(Status.PASS, "passed");
+		t.get().log(Status.PASS, "passed");
 	}
 
 	@Override
 	public void onTestFailure(ITestResult result) {
 		// TODO Auto-generated method stub
-		ITestListener.super.onTestFailure(result);
+
+		t.get().fail(result.getThrowable()+" "+result.getMethod().getMethodName());
+		try
+		{
+			driver= (WebDriver) result.getTestClass().getRealClass().getField("driver").get(result.getInstance());
+		}
+		catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+		
+
+		String f=null;
+		try {
+			f=GetScreenshot(result.getMethod().getMethodName(),driver);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		t.get().addScreenCaptureFromPath(f, result.getMethod().getMethodName());
 	}
+
 
 	@Override
 	public void onTestSkipped(ITestResult result) {
